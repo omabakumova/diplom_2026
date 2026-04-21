@@ -1,0 +1,152 @@
+\documentclass[
+  fontsize=12,
+  DIV=15,
+]{scrreprt}
+
+%% Задаем размер полей путем указания области, занимаемой текстом
+% \usepackage[a4paper, total={7in, 9in}]{geometry}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%              Настройка шрифтов
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage[no-math]{fontspec}
+% При использовании LuaLaTeX отключаем следующие два пакета
+% \usepackage{xunicode}
+% \usepackage{xltxtra}
+
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage[indentfirst=true,spelling=modern]{russian}
+\setotherlanguage{english}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+
+\unimathsetup{
+  mathbf=sym,
+  mathrm=sym,
+  % math-style=TeX,
+  % bold-style=TeX
+}
+
+% \setmainfont{CMU Serif}
+% \setromanfont{CMU Serif}
+% \setsansfont{CMU Sans Serif}
+% \setmonofont{CMU Typewriter Text}
+
+
+\setmainfont{IBM Plex Serif}
+\setromanfont{IBM Plex Serif}
+\setsansfont{IBM Plex Sans}
+\setmonofont{IBM Plex Mono}
+\setmonofont{JuliaMono}
+
+% Шрифты математических формул
+\setmathfont{Latin Modern Math}
+% \setmathfont{TeX Gyre Bonum Math}
+% \setmathfont{TeX Gyre Pagella Math}
+% \setmathfont{TeX Gyre Schola Math}
+% \setmathfont{TeX Gyre Termes Math}
+% \setmainfont{Libertinus Math}
+% \setmainfont{Cambria Math}
+% \setmathfont{XITS Math}
+% \setmathfont{STIX}
+% \setmathfont{DejaVu Math TeX Gyre} % нет
+% \setmathfont{Asana-Math fonts} % нет
+% \setmainfont{Lucida Bright Math} % нет
+% \setmainfont{Fira Math} % нет
+% \setmainfont{Minion Math} % нет
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%								Пакеты для математики
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Некоторые дополнительные символы (например стрелки)
+% \usepackage{latexsym}
+% Рукописное начертание (с завитушками)
+% \usepackage{mathrsfs}
+% Теоремы и т.п.
+% \usepackage{amsthm}
+% Пакет для объявления новых математических операторов
+% \usepackage{amsopn}
+% \usepackage{tensor}
+\usepackage{physics}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%       Настройка пакета hyperref
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  bookmarksdepth=section, 
+  unicode=true,       
+  pdftoolbar=true,       
+  pdfmenubar=true,    
+  pdffitwindow=false,  
+  pdfstartview={FitH},  
+  pdftitle={Название},
+  pdfauthor={Автор}
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%                Пакет для листингов
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Пакет для настройки verbatim'а
+% \usepackage{fancyvrb}
+% Пакет для листингов. Опция chapter указывает на нумерацию листингов по главам
+\usepackage{minted}
+% friendly monokai manni borland trac paraiso-light fruity emacs autumn
+% \usemintedstyle{bw} % черно-белый
+% \usemintedstyle{friendly}
+\setminted{
+  autogobble=true,
+  breaklines=true,
+  breakanywhere=true,
+  obeytabs=false,
+  tabsize=2,
+  linenos=true,
+  %%stepnumber=5
+}
+% Пакеты для псевдокода
+% \usepackage{verbatim}% Для исходного кода, цитат и т.д. и т.п.
+% Для алгоритмов
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+% \usepackage{algorithmicx}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%              Графика в TeX
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage{graphicx} % графика
+\usepackage{xcolor} % цвет
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%          BibLaTeX
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage[autostyle]{csquotes}
+\usepackage{url}
+
+\usepackage[%
+  backend=biber,
+  bibstyle=gost-numeric,
+  defernumbers=true,
+  % не менять местами заголовок и список авторов, если авторов больше четырех
+  movenames=false,
+  % не использовать сокращение списка авторов
+  maxbibnames=99,
+  sorting=ydnt
+]{biblatex}
+% Файл с литературой
+\bibliography{lit}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%   Определение новых команд
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Стандартные множества
+% \newcommand{\setN}{\mathbb{N}}
+% \newcommand{\setZ}{\mathbb{Z}}
+% \newcommand{\setQ}{\mathbb{Q}}
+% \newcommand{\setR}{\mathbb{R}}
+% \newcommand{\setC}{\mathbb{C}}
+
+% \renewcommand{\det}{\mathrm{det}}% Определитель
+% \renewcommand{\d}{\mathrm{d}}% Инфинитозимальный дифференциал

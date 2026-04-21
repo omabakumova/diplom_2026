@@ -1,0 +1,510 @@
+\chapter{Бикватернионы}
+
+\label{sec:DualQuaternion}
+
+Бикватернион --- это гиперкомплексное число, которое имеет два основных способа задания.
+Для начала рассмотрим первый способ задать бикватернион, с помощью кватерниона, то есть у нас будут главная и моментная части.Записывается это достаточно просто, как сумма двух кватернионов, где второй умножается на дуальную единицу, например $\varepsilon$:
+\begin{equation*}
+    \Lambda = \lambda + \varepsilon \lambda^o,
+\end{equation*}
+как было ранее отмечено, $\varepsilon$ --- дуальная единица или ее еще называют символом Клиффорда ~\cite{Chelnokov:2006}. Обычным кватернионом является $\lambda$, он отвечает за вращение и является главной частью:
+\begin{equation*}
+    \lambda = \lambda_0 \sigma + \lambda_1 i + \lambda_2 j + \lambda_3 k.
+\end{equation*}
+В свою очередь $\lambda^o$ является моментной частью, это тоже кватернион, но он умножается на дуальную единицу и отвечает за трансляцию или проще говоря перенос:
+\begin{equation*}
+    \lambda^o = \lambda_0^o \sigma + \lambda_1^o i + \lambda_2^o j + \lambda_3^o k
+\end{equation*}
+Символ $\sigma$ присутствует здесь для обозначения начала координат или скалярной части.
+
+Второе представление заключается в дуальном виде, то есть бикватернион состоит из скалярной и винтовой частей. Записывается как кватернион, но рассмотрев подробнее базисные элементы можно заметить, что они не действительные, а дуальные числа:
+\begin{equation*}
+    \Lambda = \Lambda_0 \sigma + \Lambda_1 i + \Lambda_2 j + \Lambda_3 k,
+\end{equation*}
+здесь $\Lambda_j = \lambda_j + \varepsilon \lambda_j^o$ --- дуальные числа, а $\Lambda_1 i + \Lambda_2 j + \Lambda_3 k$ --- винтовая часть кватерниона.
+
+Основное отличие второго представления от первого в том, что здесь будут работать все формулы алгебры кватернионов, достаточно произвести замену действительных чисел на дуальные.
+Упоминаяя замену одного на другое можно подойти к сути принципа Котельникова-Штуди. Следуя этому принципу действительные числа заменяются на дуальные, векторы на винты, кватернионное сопряжение на бикватернионное.
+
+\section{Операции над бикватернионами}
+
+Предположим у нас есть два бикватерниона, тогда для них будет верно:
+\begin{equation*}
+    \Lambda = \lambda + \varepsilon \lambda^o = (\lambda_0 \sigma + \lambda_1 i + \lambda_2 j + \lambda_3 k) + \varepsilon(\lambda_0^o \sigma + \lambda_1^o i + \lambda_2^o j + \lambda_3^o k),
+\end{equation*}
+\begin{equation*}
+    M = \mu + \varepsilon \mu^o = (\mu_0 \sigma + \mu_1 i + \mu_2 j + \mu_3 k) + \varepsilon(\mu_0^o \sigma + \mu_1^o i + \mu_2^o j + \mu_3^o k).
+\end{equation*}
+Если рассматривать операцию сложения подробно, то она выполняется покомпонентно, иначе говоря, отдельно складываются главные части и отдельно моментные:
+\begin{equation*}
+    \Lambda + M = (\lambda + \mu) + \varepsilon (\lambda^o + \mu^o).
+\end{equation*}
+С дуальными числами это примет следующий вид:
+\begin{equation*}
+    \Lambda + M = (\Lambda_0 + M_0)\sigma + (\Lambda_1 + M_1)i + (\Lambda_2 + M_2)j + (\Lambda_3 + M_3)k,
+\end{equation*}
+где $\Lambda_j = \lambda_j + \varepsilon \lambda_j^o$, $M_j = \mu_j + \varepsilon \mu_j^o$.
+В качестве основных свойств такого сложения можно выделить коммутативность $\Lambda + M = M + \Lambda$ и ассоциативность $\Lambda + (M + N) = (\Lambda + M) + N$.
+
+Аналогичным образом определяется и разность:
+\begin{equation*}
+    \Lambda - M = (\lambda - \mu) + \varepsilon (\lambda^o - \mu^o).
+\end{equation*}
+
+Если рассматривать дуальную форму бикватерниона $\Lambda = \Lambda_0 \sigma + \Lambda_1 i + \Lambda_2 j + \Lambda_3 k$, то он имеет скалярную и винтовую части. Скалярная обозначается часто, как $\Lambda_s$:
+\begin{equation*}
+    \Lambda_s = \Lambda_0 \sigma = (\lambda_0 + \varepsilon \lambda_0^o) \sigma,
+\end{equation*}
+Винтовая же часть обозначается зачастую, как $\Lambda_{sc}$ и имеет вид:
+\begin{equation*}
+    \Lambda_{sc} = \Lambda_1 i + \Lambda_2 j + \Lambda_3 k = (\lambda_1 + \varepsilon \lambda_1^o) i + (\lambda_2 + \varepsilon \lambda_2^o) j + (\lambda_3 + \varepsilon \lambda_3^o) k.
+\end{equation*}
+Это винт(дуальный вектор), он содержит в себе направление и момент.Тогда будет верным следующее выражение в качестве полной записи:
+\begin{equation*}
+    \Lambda = \Lambda_s + \Lambda_{sc}.
+\end{equation*}
+
+Как ранее и упоминалось умножение бикватернионов будет выполняться по аналогии с умножением кватернионов, но с учетом того, что коэффицентами должны являться дуальные числа.Предположим, что $\Lambda = \Lambda_0 \sigma + \Lambda_1 i + \Lambda_2 j + \Lambda_3 k$ и $M = M_0 \sigma + M_1 i + M_2 j + M_3 k$, где $\Lambda_j, M_j$ --- дуальные числа.
+Их произведение можно получить перемножением сумм с учетом базисных элементов:
+\begin{multline*}
+    \Lambda \circ M = (\Lambda_0 M_0 - \Lambda_1 M_1 - \Lambda_2 M_2 - \Lambda_3 M_3) \sigma + (\Lambda_0 M_1 + \Lambda_1 M_0 + \Lambda_2 M_3 - \Lambda_3 M_2) i + {}\\ 
+    {} + (\Lambda_0 M_2 - \Lambda_1 M_3 + \Lambda_2 M_0 + \Lambda_3 M_1) j + (\Lambda_0 M_3 + \Lambda_1 M_2 - \Lambda_2 M_1 + \Lambda_3 M_0) k.
+\end{multline*}
+
+Однако существует более компактная формула через винтовую алгебру, здесь будут использоваться скалярное и винтовое произведения винтов:
+\begin{equation*}
+    \Lambda \circ M = \Lambda_0 M_0 - (\Lambda_{sc} \cdot M_{sc}) + \Lambda_0 M_{sc} + M_0 \Lambda_{sc} + \Lambda_{sc} \times M_{sc}.
+\end{equation*}
+
+Помимо конкретных вспомогательных формул существует несколько свойств умножения для бикватернионов:
+\begin{itemize}
+    \item $\Lambda \circ M \neq M \circ \Lambda$ --- некоммутативность. Также по аналогии с кватернионами это происходитт из-за того, что сущетсвует антикоммутативность векторного произведения;
+    \item $\Lambda \circ (M + N) = \Lambda \circ M + \Lambda \circ N$ и $(M + N) \circ \Lambda = M \circ \Lambda + N \circ \Lambda$ --- дистрибутивность. Можно проверить вычислив напрямую;
+    \item $\Lambda \circ (M \circ N) = (\Lambda \circ M) \circ N$ --- ассоциативность. 
+\end{itemize}
+
+Существует также частный случай --- произведение двух винтов. Например, $\Lambda$ и $M$ --- чистые винты и мы знаем, что их скалярные части равны нулю, в таком случае формула значительно упрощается:
+\begin{equation*}
+    \Lambda \circ M = -(\Lambda \cdot M) + \Lambda \times M.
+\end{equation*}
+Это происходит,потому что в общей формуле уходт члены $\Lambda_0 M_0, \Lambda_0 M_{sc}$ и $M_0 \Lambda_{sc}$, в итоге остается винтовое и скалярное произведения.Помимо произведения двух винтов есть частный случай с квадратом винта:
+\begin{equation*}
+    \Lambda \circ \Lambda = -(\Lambda \cdot \Lambda) + \Lambda \times \Lambda = -|\Lambda|^2 + 0 = -|\Lambda|^2,
+\end{equation*}
+так как при векторном произведении вектора на самого себя произойдет обнуление.
+
+Бикватернионное сопряжение аналогично кватернионному. Для бикватерниона $\Lambda = \Lambda_0 \sigma + \Lambda_1 i + \Lambda_2 j + \Lambda_3 k$ будет верно, если сопряженный получится сменой знака у всех компонент вектора --- $\overline{\Lambda}$:
+\begin{equation*}
+    \overline{\Lambda} = \Lambda_0 \sigma - \Lambda_1 i - \Lambda_2 j - \Lambda_3 k.
+\end{equation*}
+В случае с кватернионной формой, которая содержит моментную и главную части, выражение будет выглядеть следующим образом:
+\begin{equation*}
+    \overline{\Lambda} = \overline{\lambda + \varepsilon \lambda^o} = \lambda^* + \varepsilon (\lambda^o)^*,
+\end{equation*}
+где $\lambda^* = \lambda_0 \sigma - \lambda_1 i - \lambda_2 j - \lambda_3 k$ --- обычное сопряжение кватернионов.
+
+Опираясь на предыдущий раздел о сопряжении бикватерниона, можно теперь найти норму бикватерниона. Норма бикватерниона получается в результате произведения бикватерниона на его сопряженный бикватернион:
+\begin{equation*}
+    \|\Lambda\| = \Lambda \circ \overline{\Lambda} = \overline{\Lambda} \circ \Lambda.
+\end{equation*}
+
+Если опустить сам громоздкий вывод формулы нормы бикватерниона, то в итоге мы получим следующего вида выражение:
+\begin{equation*}
+    \|\Lambda\| = (\lambda_0^2 + \lambda_1^2 + \lambda_2^2 + \lambda_3^2) + 2\varepsilon (\lambda_0 \lambda_0^o + \lambda_1 \lambda_1^o + \lambda_2 \lambda_2^o + \lambda_3 \lambda_3^o),
+\end{equation*}
+также есть более компактная запись этой формулы :
+\begin{equation*}
+    \|\Lambda\| = |\lambda|^2 + 2\varepsilon (\lambda \cdot \lambda^o),
+\end{equation*}
+где $\lambda \cdot \lambda^o$ --- скалярное произведение кватернионов.
+
+Бикватернион $\Lambda^{-1}$ называется обратным к $\Lambda$, если:
+\begin{equation*}
+    \Lambda \circ \Lambda^{-1} = \Lambda^{-1} \circ \Lambda = \sigma.
+\end{equation*}
+Также сущеcтвует формула обратного бикватерниона:
+\begin{equation*}
+    \Lambda^{-1} = \|\Lambda\|^{-1} \overline{\Lambda},
+\end{equation*}
+заметим, что $\|\Lambda\|^{-1}$ --- это обратно дуальное число, а оно сущетсвует не всегда.
+
+Предположим. что у нас есть дуальноt число $A = a + \varepsilon a^o$, тогда обратное будет иметь вид:
+\begin{equation*}
+    A^{-1} = \frac{1}{a} - \varepsilon \frac{a^o}{a^2}, 
+\end{equation*}
+если $a \neq 0$. Если же $a = 0$, то обратное число не может существовать в целом, потому что произойдет деление на ноль в главной части.Тогда подведем некоторый итог,для нормы $\|\Lambda\| = |\lambda|^2 + 2\varepsilon (\lambda \cdot \lambda^o)$ обратное существует только, если главная часть $|\lambda|^2 \neq 0$.
+Тогда рассмотрим условие существования обратного кватерниона.Главная часть $\lambda \neq 0$. Если $\lambda = 0$, но $\lambda^o \neq 0$, то $\|\Lambda\| = 0 + 2\varepsilon(0 \cdot \lambda^o) = 0$, в таком случае обратного не существует.
+
+Для обратного бикватерниона формула имеет вид:
+\begin{equation*}
+    \Lambda^{-1} = \left( \frac{1}{|\lambda|^2} - \varepsilon \frac{2(\lambda \cdot \lambda^o)}{|\lambda|^4} \right) (\lambda^* + \varepsilon (\lambda^o)^*)
+\end{equation*}
+
+Вспомнив свойство некоммутативности бикватернионов, мы знаем, что деление нельзя произвести за одну операцию, необходимы две разные операции.
+
+Для начала разберемся с делением в левой части, то есть с первой операцией. У нас есть уравнение $\Lambda \circ X = M$ относительно $X$. нужно умножить на $\Lambda^{-1}$:
+\begin{equation*}
+    \Lambda^{-1} \circ (\Lambda \circ X) = (\Lambda^{-1} \circ \Lambda) \circ X = \sigma \circ X = X = \Lambda^{-1} \circ M,
+\end{equation*}
+следовательно результатом первой операции будет $X = \Lambda^{-1} \circ M$.
+
+Перейдем теперь к делению правой части, второй операции. Решим уравнение $X \circ \Lambda = M$ относительно $X$. Нужно умножить на $\Lambda^{-1}$:
+\begin{equation*}
+    (X \circ \Lambda) \circ \Lambda^{-1} = X \circ (\Lambda \circ \Lambda^{-1}) = X \circ \sigma = X = M \circ \Lambda^{-1},
+\end{equation*}
+следовательно результатом второй операции деления будет $X = M \circ \Lambda^{-1}$. 
+
+Параметра и инварианта нет в обычной кватернионной алгебре, их появление объясняется как раз появлением дуальных частей. Инариант бикватерниона $\Lambda = \lambda + \varepsilon \lambda^o$ является скалярным произведением главной и моментной частей:
+\begin{equation*}
+    \Lambda_inv = \lambda \cdot \lambda^o = \lambda_0 \lambda_0^o + \lambda_1 \lambda_1^o + \lambda_2 \lambda_2^o + \lambda_3 \lambda_3^o.
+\end{equation*}
+Это называется инвариантом, потому что величина не меняется при некоторых преобразованиях.
+
+Рассмотрев инвариант, можно подойти к параметру, потому что параметр бикватерниона $p$ --- это отношение инварианта к квадрату нормы главной части:
+\begin{equation*}
+    p = \frac{\lambda \cdot \lambda^o}{|\lambda|^2} = \frac{\lambda_0 \lambda_0^o + \lambda_1 \lambda_1^o + \lambda_2 \lambda_2^o + \lambda_3 \lambda_3^o}{\lambda_0^2 + \lambda_1^2 + \lambda_2^2 + \lambda_3^2},
+\end{equation*}
+отметим, что $p = \infty$ является чистым моментом, потому что главная часть обнуляется, а $p = 0$ соответствует чистой прямой.
+
+Выделим основные частные случаи:
+\begin{enumerate}
+    \item Для скалярной части, где винтовая часть $\Lambda_{sc} = 0$:
+        \begin{equation*}
+            p_s = \frac{\lambda_0^o}{\lambda_0}
+        \end{equation*}
+    \item Для винтвоой части, где скалярная часть $\Lambda_s = 0$:
+        \begin{equation*}
+            p_{sc} = \frac{\lambda_1 \lambda_1^o + \lambda_2 \lambda_2^o + \lambda_3 \lambda_3^o}{\lambda_1^2 + \lambda_2^2 + \lambda_3^2}.
+        \end{equation*}
+\end{enumerate}
+
+Тензором бикватерниона $\Lambda$ называются квадратный корень из его нормы:
+\begin{equation*}
+    |\Lambda| = \sqrt{\|\Lambda\|}.
+\end{equation*}
+Для того, чтобы найти модуль мы можем использовать формулу корня из дуального числа при $|\lambda| \neq 0$:
+\begin{equation*}
+    |\Lambda| = \sqrt{|\lambda|^2 + 2\varepsilon (\lambda \cdot \lambda^o)} = |\lambda| \left(1 + \varepsilon \frac{\lambda \cdot \lambda^o}{|\lambda|^2}\right) = |\lambda| (1 + \varepsilon p).
+\end{equation*}
+Если главная часть $\lambda = 0$ или даже норма $\|\Lambda\| \neq 0$, то модуль теряет смысл, потому что корень из дуального числа, где главная часть нулевая не может быть определена однозначно.
+
+В случае с верзором, то это просто единичный бикватернион, который получили с помощью нормировки:
+\begin{equation*}
+    \Lambda_n = |\Lambda|^{-1} \Lambda.
+\end{equation*}
+При разложении бикватерниона:
+\begin{equation*}
+    \Lambda = |\Lambda| \Lambda_n.
+\end{equation*}
+Значит, что любой бикватернион может быть представлен, как прозведение его модуля(тензора) и верзора.
+
+\section{Тригонаметрическое представление бикватерниона}
+
+Триногонаметрическое представление позволяет обощить форму кватерниона $q = |q|(\cos\theta + \vb{n}\sin\theta)$ на бикватернионы.
+Вернемся к дуальным числам, предположим, что у нас есть два дуальных числа $A = a + \varepsilon a^o$ и $B = b + \varepsilon b^o$, и они удовлетворют условию $A^2 + B^2 = 1$, то существует такой дуальный угол $\Theta = \theta + \varepsilon \theta^o$, что:
+\begin{equation*}
+    \cos\Theta = A, \quad \sin\Theta = B.
+\end{equation*}
+
+Опираясь на описанное выше, применим это к бикватерниону. Опять же рассмотрим два дуальных числа $A = \frac{\Lambda_0}{|\Lambda|}, \quad B = \frac{|\Lambda_{sc}|}{|\Lambda|}$, где $|\Lambda_{sc}| = \sqrt{\Lambda_1^2 + \Lambda_2^2 + \Lambda_3^2}$ --- модуль винтвоой части.
+Тогда эти числа удовлетворяют условию $A^2 + B^2 = 1$, потому что:
+\begin{equation*}
+    \left(\frac{\Lambda_0}{|\Lambda|}\right)^2 + \left(\frac{|\Lambda_{sc}|}{|\Lambda|}\right)^2 = \frac{\Lambda_0^2 + |\Lambda_{sc}|^2}{|\Lambda|^2} = \frac{|\Lambda|^2}{|\Lambda|^2} = 1,
+\end{equation*}
+а значит, что есть такой дуальный угол $\Theta = \theta + \varepsilon \theta^o$, что:
+\begin{equation*}
+    \cos\Theta = \frac{\Lambda_0}{|\Lambda|}, \quad \sin\Theta = \frac{|\Lambda_{sc}|}{|\Lambda|}.
+\end{equation*}
+
+Также важно ввести такое понятие, как единичный винт $E$, он будет задавать направление винтовой части:
+\begin{equation*}
+    E = \frac{\Lambda_{sc}}{|\Lambda_{sc}|} = \frac{\Lambda_1 i + \Lambda_2 j + \Lambda_3 k}{\sqrt{\Lambda_1^2 + \Lambda_2^2 + \Lambda_3^2}},
+\end{equation*}
+где $E$ --- чистый бикватернион или проще говоря винт с единичной нормой($|E| = 1$).
+
+Теперь бикватернион $\Lambda$ можно записать в новой форме:
+\begin{equation*}
+    \Lambda = \Lambda_0 + \Lambda_{sc} = |\Lambda| \left( \frac{\Lambda_0}{|\Lambda|} + \frac{|\Lambda_{sc}|}{|\Lambda|} E \right) = |\Lambda| (\cos\Theta + E \sin\Theta).
+\end{equation*}
+Для единичного бикватерниона $|\Lambda| = 1$ получим следующее выражение:
+\begin{equation*}
+    \Lambda_n = \cos\Theta + E \sin\Theta
+\end{equation*}
+Также можно представить и обратный бикватернион в тригонометрической форме. Тут получится также как и для кватернионов, обратный получается в результате замены знака угла:
+\begin{equation*}
+    \Lambda^{-1} = |\Lambda|^{-1} (\cos\Theta - E \sin\Theta),
+\end{equation*}
+\begin{equation*}
+    \Lambda_n^{-1} = \cos\Theta - E \sin\Theta.
+\end{equation*}
+
+В контексте кватернионов используется 4-мерное пространство с базисом ${\sigma, i, j, k}$ для того, чтобы можно было представить точки и вектора, т.е. точка $P = \sigma + \vb{p} = \sigma + p_1 i + p_2 j + p_3 k$ и вектор $\vb{v} = v_1 i + v_2 j + v_3 k$. Но говоря о кватернионном представлении стоит заметить, что оно не различает типы объектов.
+Например будут одинаково выглядеть точка и плоскость так, как оба имеют скалярную и векторную части.Также и с обычным вектором, и вектором нормали. Тогда уже можно подойти как раз к бикватернионам, потому что они распределяют геометрические объекты по разным подпространствам 8-мерного пространства с базисом вида ${\sigma, i, j, k, \sigma \varepsilon, i \varepsilon, j \varepsilon, k \varepsilon}$.
+
+Добавим некоторые пояснения к базисным элементам, использующимися для представления точек и векторов:
+\begin{itemize}
+    \item $\sigma$ --- начало координат, является скалярной единицей;
+    \item $i \varepsilon, j \varepsilon, k \varepsilon$ --- определяют направления в пространстве, содержат дуальную единицу.
+\end{itemize}
+
+Также есть такой объект, как аффинная точка. Аффинная точка --- это точка $P$ с декартовыми координатами вида $(p_1, p_2, p_3)$ и имеет представление в виде бикватерниона:
+\begin{equation*}
+    P = \sigma + (p_1 i + p_2 j + p_3 k) \varepsilon = \sigma + \vb{p} \varepsilon.
+\end{equation*}
+
+Точечная масса с $m$ и имеющей координаты $(p_1 i + p_2 j + p_3 k)$ имеет следующее представление:
+\begin{equation*}
+    P = mO + (p_1 i + p_2 j + p_3 k) \varepsilon = mO + \vb{p} \varepsilon.
+\end{equation*}
+
+Важное свойство однородности: умножение на ненулевое действительно число $\lambda$ не меняет положение точки:
+\begin{equation*}
+    \lambda P = \lambda mO + \lambda\vb{p}\varepsilon \equiv \sigma + \frac{\lambda\vb{p}}{\lambda m}\varepsilon = \sigma + \frac{\vb{p}}{m}\varepsilon.
+\end{equation*}
+
+Перейдем теперь к векторам. Свободный вектор $\vb{v} = v_1 i + v_2 j + v_3 k$, также имеет преставление бикватерниона:
+\begin{equation*}
+    \vb{V} = (v_1 i + v_2 j + v_3 k)\varepsilon = \vb{v}\varepsilon,
+\end{equation*}
+отметим, что в случае с векторами у нас полностью отсутствует скалярная часть.
+
+Для представления плоскостей используются базисные элементы такие, как $\sigma \varepsilon$ --- дуальная скалярная единица, которую используют для представления расстояния и $i, j, k$ --- обычные векторные единицы, являются представлением нормали.
+
+Плоскость $\Pi$ задается уравнением $(\vb{n}, \vb{x}) + d = 0$, где $\vb{n} = n_1 i + n_2 j + n_3 k$ --- вектор нормали, к слову, он не обязательно должен быть единичным и $d$ --- параметр, который связан с расстоянием от начала координат.Тогда плоскость представленная бикватернионом имеет следующий вид:
+\begin{equation*}
+    \Pi = \vb{n} + d \sigma \varepsilon,
+\end{equation*}
+здесь векторная часть $\vb{n}$ --- это нормаль плоскости а дуальная скалярная часть $d \sigma \varepsilon$ ---  это расстояние, которое векторно умножается на направление.
+
+Говоря о нормировке, так же как и для точек, представление плоскости является однородным:
+\begin{equation*}
+    \lambda\Pi = \lambda \vb{n} + \lambda d \sigma \varepsilon
+\end{equation*}
+задает ту же самую плоскость при любом $\lambda \neq 0$.
+
+Для того, чтобы получить единичную нормаль $\hat{\vb{n}}$ и расстояние $\delta$ используют формулу:
+\begin{equation*}
+    \hat{\Pi} = \frac{\Pi}{|\Pi|} = \hat{\vb{n}} + \delta \sigma \varepsilon,
+\end{equation*}
+где $|\Pi| = \|\vb{n}$Б следовательно модуль бикватерниона равен длине нормали.
+
+Сама нормаль $\vb{n}$ определяет направление, оно перпендикулярно плоскости, а $d$ относительно этой нормали определяет нахождение плоскости. Точка на плоскости, которую определяют как самую близкую к началу координат задают вектором вида:
+\begin{equation*}
+    -\frac{d\vb{n}}{\|\vb{n}\|^2}.
+\end{equation*}
+
+Существует также условие принадлежности точки к рассматриваемой нами плоскости. Используя скалярное произведение кватернионов можно убедиться в том, ,лежит ли точка на плоскости или нет. Предположим, что у нас есть точка $P = \sigma + \vb{p}\varepsilon$ и соответственно плоскость $\Pi = \vb{n} + dO\varepsilon$, тогде если мы хотим получить результат скалярного произведения, то необходимо воспользоваться следующей формулой:
+\begin{equation*}
+    P \cdot \Pi = (\sigma + \vb{p}\varepsilon) \cdot (\vb{n} + d \sigma \varepsilon) = (d + (\vb{p}, \vb{n}))\varepsilon,
+\end{equation*}
+где само условие принадлежности заключается в том, что $P$ лежит на $\Pi$ $\iff P \cdot \Pi = 0 \iff d + (\vb{p}, \vb{n}) = 0$. Простыми словами результатом скалярного произведения будет дуальное число, а равенство нулю будет являться возможным только если сам коэффицент при $\varepsilon$ будет равен нулю.То есть это в точности повторяет уравнение плоскости $(\vb{n}, \vb{p}) + d = 0$.
+
+Для задания прямой в пространстве сущетсвует несколько способов:
+\begin{itemize}
+    \item Двумя точками;
+    \item Точкой и направляющим вектором;
+    \item Двумя плоскостями;
+    \item Координатами Плюккера;
+    \item Дуальными координатами Плюккера.
+\end{itemize}
+Все эти способы объединяет одно условие --- они требуют шесть параметров.Чаще всего конечно в пространстве бикватернионов используются координаты Плюккера.
+
+Предположим у нас есть некоторая прямая $t$ и она проходит через точку $P$, которая в свою очередь параллельна вектору $\vb{v}$, тогда все сводится к тому. что шесть координат Плюккера данной прямой --- это пара векторов $(\vb{v}, \vb{u})$, где:
+\begin{equation*}
+    \vb{u} = (\vb{p} - \vb{o}) \times \vb{v} = \vb{p} \times \vb{v},
+\end{equation*}
+где $\vb{o} = \vb{0}$, потому что начало координат.В данном случае $\vb{v}$ --- это вектор, который параллелен прямой $t$ или иными словами направляющий вектор, а $\vb{u}$ --- вектор нормали к плоскости, он содержит в себе прямую и начало координат.
+Есть также важное свойство вектора $\vb{u} = \vb{p} \times \vb{v}$, он не зависит от выбора точки $P$ на прямой.
+
+Если мы хотим найти точку на прямой и нам даны координаты Плюккера $(\vb{v}, \vb{u})$ прямой $t$, то есть несколько случаев. Если прямая проходит через начало координат, то $\vb{u} = 0$, а точка лежит на прямой так, как начало координат. Также может быть случай, если прямая не проходит через начало координат, тогда предположим, что у нас есть точка $S$. Это точка на прямой и ближайшая к началу координат, следовательно вектор $\vb{q} = \vb{OQ}$ будет перпендикулярен направляющему вектору $\vb{v}$. Вектор $\vb{u} = \vb{q} \times \vb{v}$ перпендикулярен и $\vb{q}$, и $\vb{v}$.
+Тогда можно утверждать, что $\vb{q}, \vb{v}$ и $\vb{u}$ взаимно ортогональны.
+
+В векторной алгебре есть соотношение вида:
+\begin{equation*}
+    \vb{v} \times (\vb{q} \times \vb{v}) = \|\vb{v}\|^2 \vb{q},
+\end{equation*}
+тогда отсюда мы можем получить формулу, которая поможет найти ближайшую точку:
+\begin{equation*}
+    \vb{q} = \frac{\vb{v} \times \vb{u}}{\|\vb{v}\|^2}.
+\end{equation*}
+Соотвественно, основной смысл в  том, что вектор от начала координат до ближайшей искомой нами точки прямой, выражается через направляющий вектор и момент.
+
+Так как мы уже начали рассматривать представление с помощью координат Плюккера, то существует компактная запись в виде бикватерниона:
+\begin{equation*}
+    L = \vb{v} + \vb{u}\varepsilon,
+\end{equation*}
+здесь $\vb{v}$ ---  вектор, параллельный прямой, а $\vb{u}\varepsilon$ ---  момент прямой.
+
+Существует условие Плюккера, из определения $\vb{u} = \vb{p} \times \vb{v}$ выведено соотношение:
+\begin{equation*}
+    \vb{v} \cdot \vb{u} = \vb{v} \cdot (\vb{p} \times \vb{v}) = 0,
+\end{equation*}
+где векторы $\vb{v}$ и $\vb{u}$ ортогональные, это и есть условие Плюккера.Поэтому если мы возьмем любой бикватернион вида $L = \vb{v} + \vb{u}\varepsilon$, где $ \vb{v} \cdot \vb{u} = 0$, это будет представлять некоторую прямую $t$ в пространстве.
+
+Для того, чтобы понять, где искать информацию о положении, можно подробнее рассмотреть отношение длин векторов. Предположим, что у нас есть расстояние от начала координат до прямой.
+Назовем $d$ растоянием от начала координат $O$ до прямой $t$, следовательно для ближайшей точки $S$ будет верно $|\vb{q}\| = d$:
+\begin{equation*}
+    |\vb{u}\| = \|\vb{q} \times \vb{v}\| = \|\vb{q}\| \cdot \|\vb{v}\| \cdot \sin 90^o = d \cdot \|\vb{v}\|,
+\end{equation*}
+тогда $\frac{\|\vb{u}\|}{\|\vb{v}\|} = d$.
+
+Расстояние от начала координат до прямой равно отношению длин этих векторов $\vb{u}$ и $\vb{v}$. Сам вектор $\vb{v}$ имеет произвольную длину, но отношение $\frac{\|\vb{u}\|}{\|\vb{v}\|}$ называется инвариантом, который определяет положение прямой.
+
+Помимо обычных координат Плюккера, как было выше сказано, есть еще дуальные. Их получают после применения операции дуализации к прямой:
+\begin{equation*}
+    T^\dagger = (\vb{v} + \vb{u}\varepsilon)^\dagger = \vb{u} + \vb{v}\varepsilon,
+\end{equation*}
+где $T^\dagger$ является той же самой прямой только в дуальном пространстве.
+
+\section{Винтовое движение с помощью бикватернионов}
+\label{sec:ScrewMotion}
+
+Вернемся к исходной формуле для кватернионов, описывающей вращение. Единичный кватернион вращения в тригонометрической форме имеет вид:
+\begin{equation*}
+    \lambda = \cos\frac{\theta}{2} \,\sigma + \sin\frac{\theta}{2} \,\vb{a},
+\end{equation*}
+где $\theta$ угол поворота, $\vb{a}$ единичный вектор оси вращения, а $\sigma$ --- скалярная единица, обозначающая начало координат. В целом скалярную единицу можно было опустить, так как у Челнокова ~\cite{Chelnokov:2006} используется единица, а у Голдмана ~\cite{Goldman:2023} вовсе $O$, поэтому данный символ необходим лишь для разделения скалярной и векторной частей.
+
+Сэндвич-формула для вращения точки $P = w\sigma + \vb{p}$ в однородных координатах будет следующей:
+\begin{equation*}
+    P' = \lambda P \lambda^*.
+\end{equation*}
+Отметим, что скалярная часть $w$ не меняется при вращении:
+\begin{equation*}
+    \lambda(w\sigma + \vb{p})\lambda^* = w\lambda\lambda^* + \lambda\vb{p}\lambda^* = w\sigma + \lambda\vb{p}\lambda^*,
+\end{equation*}
+также это будет работать и для свободных векторов, где $w = 0$.
+
+Чтобы совершить переход от кватернионного способа вращения к бикватернионному необходимо воспользоваться принципом перенесения Котельникова-Штуди ~\cite{Kotelnikov:2006}. Это значит что угол $theta$ заменяется на дуальный угол  $\Theta = \theta + \varepsilon \theta^o$, ось(вектор) $\vb{a}$ на винт $\vb{A} = \vb{a} + \varepsilon \vb{a}^o$, а кватернионное сопряжение $(\cdot)^*$ на бикватернионное сопряжение $(\cdot)^\dagger$.
+
+Применяя данный принцип перенесения Котельникова-Штуди, мы получаем бикватернион винтового движения:
+\begin{equation*}
+    \Lambda = \cos\frac{\Theta}{2} + \sin\frac{\Theta}{2} \vb{A},
+\end{equation*}
+где $\Theta = \theta + \varepsilon \theta^o$ и $\vb{A} = \vb{a} + \varepsilon \vb{a}^o$.
+
+Есть более развернутая форма через действительные числа:
+\begin{equation*}
+    \Lambda = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}(\vb{a} + \varepsilon\vb{a}^o) + \left( \cos\frac{\theta}{2}\vb{a} - \sin\frac{\theta}{2} \right)\frac{\theta^o}{2}\varepsilon.
+\end{equation*}
+Также возможны частные случаи вроде чистого вращения и чистой трансляции. Если $\theta^o = 0$, то это чистое вращение:
+\begin{equation*}
+    R = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}(\vb{a} + \varepsilon\vb{a}^o).
+\end{equation*}
+Если же $\theta = 0$, то это чистая трансляция:
+\begin{equation*}
+    T = 1 + \frac{\theta^o}{2}\vb{a}\varepsilon.
+\end{equation*}
+Здесь как раз применима коммутативность, потому что для винтового движения вдоль одной оси $R$ и $T$ коммутируют, следовательно $RT = TR$. 
+
+Аффинная точка $P$ может быть представлена в виде бикватерниона:
+\begin{equation*}
+    P = \sigma + \vb{p}\varepsilon = \sigma + (x i + y j + z k)\varepsilon.
+\end{equation*}
+Тогда рассмотрим сэндвич-формулу для винтового движения точки:
+\begin{equation*}
+    P' = \Lambda P \Lambda^\dagger,
+\end{equation*}
+а для полной формулы точки будет верно:
+\begin{equation*}
+    P' = \Lambda P \Lambda^\dagger = \sigma + \big(\cos\theta\,\vb{p} + \sin\theta\,\vb{a}\times\vb{p} + (1-\cos\theta)(\vb{a},\vb{p})\vb{a} + \sin\theta\,\vb{a}^o + (1-\cos\theta)\,\vb{a}\times\vb{a}^o + \theta^o\vb{a}\big)\varepsilon
+\end{equation*}
+Аналогично эту формулу можно получить, используя вращение вокруг произвольной оси. Достаточно перенести начало координат в точку $\vb{p}_0 = \vb{a}\times\vb{a}^o$ на оси, произвести вращение по формуле Родрига и сделать обратный перенос.
+
+Если рассматривать чистое вращение, то для свободного вектора $\vb{V} = \vb{v}\varepsilon$:
+\begin{equation*}
+    \vb{V}' = \Lambda \vb{V} \Lambda^\dagger = \big(\cos\theta\,\vb{v} + \sin\theta\,\vb{a}\times\vb{v} + (1-\cos\theta)(\vb{a},\vb{v})\vb{a}\big)\varepsilon,
+\end{equation*}
+где трансляционная часть $\Lambda\Lambda^\dagger$  никак не влияет на свободный вектор.
+
+Теперь рассмотрим чистую трансляцию точки. Для бикватерниона траснляции $T = 1 + \frac{\theta^o}{2}\vb{a}\varepsilon$:
+\begin{equation*}
+    P' = T P T^\dagger = \sigma + (\vb{p} + \theta^o\vb{a})\varepsilon.
+\end{equation*}
+В случае со свободным вектором трансляция не действует:
+\begin{equation*}
+    \vb{V}' = T \vb{V} T^\dagger = \vb{v}\varepsilon = \vb{V}.
+\end{equation*}
+
+Предположим, что прямая $L$ задается чистым бикватернионом:
+\begin{equation*}
+    L = \vb{v} + \vb{m}\varepsilon.
+\end{equation*}
+Тогда можно рассмотреть сэндвич-формулу для прямой. Заметим, что в отличие от точки, для прямой используется сопряжение $(\cdot)^*$, а не $(\cdot)^\dagger$:
+\begin{equation*}
+    L' = \Lambda L \Lambda^*.
+\end{equation*}
+
+Чистое вращение прямой для $R = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}(\vb{a} + \varepsilon\vb{a}^o)$:
+\begin{equation*}
+    L' = R L R^*,
+\end{equation*}
+если опустить громоздкие выкладки, полная формула чистого вращения будет иметь вид:
+\begin{multline*}
+    L' = R(\vb{v} + \vb{m}\varepsilon)R^* = \bigg[ \cos\theta\,\vb{v} + \sin\theta\,\vb{a}\times\vb{v} + (1-\cos\theta)(\vb{a},\vb{v})\vb{a} \bigg] +{}\\
+    {}+ \bigg[ \cos\theta\,\vb{m} + \sin\theta\,\vb{a}\times\vb{m} + (1-\cos\theta)(\vb{a},\vb{m})\vb{a} + \sin\theta\,\vb{a}^o\times\vb{v} + (1-\cos\theta)\,\vb{v}\times(\vb{a}\times\vb{a}^o) \bigg] \varepsilon.
+\end{multline*}
+Чистая трансляция для $T = 1 + \frac{\theta^o}{2}\vb{a}\varepsilon$:
+\begin{equation*}
+    L' = T L T^*,
+\end{equation*}
+тогда полный вид формулы будет иметь вид:
+\begin{equation*}
+    L' = \vb{v} + (\vb{m} + \theta^o\vb{a}\times\vb{v})\varepsilon
+\end{equation*}
+
+Плоскость $\Pi$ задается уравнением ($\vb{n}, \vb{x}) + d = 0$ и может быть представлена в качестве бикватерниона:
+\begin{equation*}
+    \Pi = \vb{n} + d\varepsilon,
+\end{equation*}
+где $\vb{n}$ --- вектор нормали, он может быть не обязательно единичным и $d$ --- параметр расстояния.
+
+Сама сэндвич-формула для плоскости имеет вид:
+\begin{equation*}
+    \Pi' = \Lambda \Pi \Lambda^\dagger,
+\end{equation*}
+отметим, что здесь уже используется сопряжение $(\cdot)^\dagger$.
+
+Чистое вращение плоскости для $R = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}(\vb{a} + \varepsilon\vb{a}^o)$:
+\begin{equation*}
+    \Pi' = R \Pi R^\dagger = R\vb{n}R^\dagger + d\varepsilon RR^\dagger,
+\end{equation*}
+тогда полная формула:
+\begin{multline*}
+    \Pi' = R(\vb{n} + d\varepsilon)R^\dagger = \bigg[ \cos\theta\,\vb{n} + \sin\theta\,\vb{a}\times\vb{n} + (1-\cos\theta)(\vb{n},\vb{a})\vb{a} \bigg] +{}\\
+    {}+ \bigg[ d - \sin\theta\,(\vb{a}^o,\vb{n}) - (1-\cos\theta)\,(\vb{a},\vb{n},\vb{a}^o) \bigg] \varepsilon.
+\end{multline*}
+
+Чистая трансляция для $T = 1 + \frac{\theta^o}{2}\vb{a}\varepsilon$:
+\begin{equation*}
+    \Pi' = T \Pi T^\dagger,
+\end{equation*}
+следовательно итоговое выражение будет иметь вид:
+\begin{equation*}
+    \Pi' = \vb{n} + \big(d + \theta^o(\vb{a},\vb{n})\big)\varepsilon.
+\end{equation*}
+
+\section{Отражение относительно плоскости}
+\label{sec:Reflection}
+
+Для того, чтобы провести отражение какого-либо объекта в пространстве относительно плоскости $\Pi$ необходимо задать ее единичной нормалью $\vb{n}$ и расстоянием $d$ от начала координат:
+\begin{equation*}
+    N = \vb{n} + d\varepsilon.
+\end{equation*}
+
+Задав плоскость относительно, которой будем отражать, можно перейти к примерам таких объектов. Для отражения точки $P = w\sigma + \vb{p}\varepsilon$ будет верно:
+\begin{equation*}
+  P' = -N P^* N = \sigma + \big(\vb{p} - 2(\vb{p},\vb{n})\vb{n} - 2d\vb{n}\big)\varepsilon.
+\end{equation*}
+
+В случае с прямой $L = \vb{v} + \vb{m}\varepsilon$ используется уже другое выражение с использованием обратного элемента:
+\begin{equation*}
+  L' = N L^\dagger N^{-1} = \vb{n}\vb{v}\vb{n} + \big((P' - \sigma) \times (\vb{n}\vb{v}\vb{n})\big),
+\end{equation*}
+так как $\|\vb{n}\| = 1$, то $N^{-1} = N^* = -\vb{n} + d\varepsilon$. Такой же вид формулы для отражения точки имеется и в ~\cite{Goldman:2023}.
+
+Для плоскости $\Pi = \vb{\nu} + \delta\varepsilon$, которую отражаем и $N = \vb{n} + d\varepsilon$ самой плоскости отражения предлагается использовать следующее выражение:
+\begin{equation*}
+  \Pi' = -N \Pi^* N = \vb{\nu} - 2(\vb{\nu},\vb{n})\vb{n} - \big(2d(\vb{\nu},\vb{n}) - \delta\big)\varepsilon.
+\end{equation*}
+
