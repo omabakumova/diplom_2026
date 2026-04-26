@@ -23,7 +23,7 @@
 \end{equation*}
 здесь $\Lambda_j = \lambda_j + \varepsilon \lambda_j^o$ --- дуальные числа, а $\Lambda_1 i + \Lambda_2 j + \Lambda_3 k$ --- винтовая часть кватерниона.
 
-Основное отличие второго представления от первого в том, что здесь будут работать все формулы алгебры кватернионов, достаточно произвести замену действительных чисел на дуальные.
+Основное отличие второго представления от первого в том, что здесь будут работать все формулы алгебры кватернионов, достаточно произвести замену действительных чисел на дуальные ~\cite{Ziegler:1985}.
 Упоминаяя замену одного на другое можно подойти к сути принципа Котельникова-Штуди. Следуя этому принципу действительные числа заменяются на дуальные, векторы на винты, кватернионное сопряжение на бикватернионное.
 
 \section{Операции над бикватернионами}
@@ -507,4 +507,128 @@
 \begin{equation*}
   \Pi' = -N \Pi^* N = \vb{\nu} - 2(\vb{\nu},\vb{n})\vb{n} - \big(2d(\vb{\nu},\vb{n}) - \delta\big)\varepsilon.
 \end{equation*}
+
+\section{Практическое применение}
+
+\subsection{Примеры винтового движения}
+
+Важно отметить, что конкретно бикватернионы не реализованы в Julia, но они активно применяются при реализации винтового движения, как в ручных вычислениях, так и в программе, предполагающей работу с винтовым движением.
+Благодаря перечисленным выше пакетам в Julia можно реализовать бикватернионы самостоятельно, изучив теоретические работы по бикватернионам и алгоритмам их преобразования, а затем построив собственную структуру данных и набор функций. Необходимо реализовать основные операции над бикватернионами из разделов ~\ref{sec:DualQuaternion} и формулы винтового движения ~\ref{sec:ScrewMotion}.
+
+Для удобства дальнейших вычислений реализуем функцию преобразования точки в бикватернион:
+
+\begin{minted}{julia}
+    function point_to_dualquaternion(p::Vector)
+        return DualQuaternion(
+            Quaternion(1.0, 0.0, 0.0, 0.0),  
+            Quaternion(0.0, p[1], p[2], p[3]) 
+        )
+    end
+\end{minted}
+
+Аналогично определим функцию для извлечения координат точки из бикватерниона:
+
+\begin{minted}{julia}
+    function dualquaternion_to_point(dq::DualQuaternion)
+        return [dq.qo.v1, dq.qo.v2, dq.qo.v3]
+    end
+\end{minted}
+
+Теперь определим само винтовое движение, задав его основные параметры:
+
+\begin{minted}{julia}
+    angle = π  
+    translation_distance = 1.0  
+    θ = Dual(angle, translation_distance)  
+\end{minted}
+
+В качестве оси винтового движения зададим ось $Oz$:
+
+\begin{minted}{julia}
+    axis_direction = normalize([0.0, 0.0, 1.0])
+    A = DualQuaternion(
+        Quaternion(0.0, axis_direction...), 
+        Quaternion(0.0, 0.0, 0.0, 0.0)
+    )
+\end{minted}
+
+Для преобразования бикватерниона, соответствующего точке, используем <<сэндвич-формулу>> :
+
+\begin{minted}{julia}
+    motor_func = PointSandwichFormula(A, Θ)
+\end{minted}
+
+Применив винтовое движение ко всем точкам пирамиды, мы получим ее отражение относительно плоскости. Итоговый результат выше описанных операций представлен на графике ~\ref{fig:img001}. Также были добавлены ползунки для дуального угла и длины трансляции с помощью пакета \verb|PlutoUI|, чтобы винтовое движение объекта в пространстве было более наглядным.
+
+\begin{figure}
+  \center
+  \includegraphics[width=0.7\textwidth]{img/2.pdf}
+  \caption{Винтовое движение пирамиды с параметрами вращения $180^\circ$ и длиной трансляции равной единице вокруг оси $Oz$}
+  \label{fig:img001}
+\end{figure}
+
+Также приведем пример винтового движения объекта в пространстве вокруг произвольной оси. Ось будем задавать в сферических координатах:
+
+\begin{minted}{julia}
+    function spherical_to_cartesian(θ_deg::Float64, φ_deg::Float64)
+        θ = deg2rad(θ_deg)
+        φ = deg2rad(φ_deg)
+        normalize([sin(θ)[club172098281|φ], sin(θ)φ, cos(θ)])
+    end
+
+    polar_angle = 60.0    # от оси Z
+    azimuth_angle = 45.0  # от оси X
+    axis_direction = spherical_to_cartesian(polar_angle, azimuth_angle)
+\end{minted}
+
+Запустив программу, получим результат винтового движения объекта в пространстве вокруг произвольной оси, как показано на графике ~\ref{fig:img002}.
+
+\begin{figure}
+    \center
+    \includegraphics[width=0.7\textwidth]{img/3.pdf}
+    \caption{Винтовое движение пирамиды с параметрами вращения $180^\circ$ и длиной трансляции равной единице вокруг оси $Oz$ вокруг произвольной оси}
+    \label{fig:img002}
+\end{figure}
+
+\subsection{Примеры отражения объекта}
+
+Попробуем теперь программно реализовать отражение пирамиды относительно плоскости. Для этого в блок с операциями над бикватернионами добавим некоторые формулы из раздела ~\ref{sec:Reflection}. Функция для задания плоскости будет выглядеть следующим образом:
+
+\begin{minted}{julia}
+    function dq_plane(n::AbstractVector, d::Real)
+    @assert length(n) == 3 "Normal vector must have length 3"
+    return DualQuaternion(
+        Quaternion(0.0, n[1], n[2], n[3]),
+        Quaternion(-d, 0.0, 0.0, 0.0)
+    )
+    end
+\end{minted}
+
+А для самой функции отражения точки будет верно:
+
+\begin{minted}{julia}
+    function reflect_point(P::DualQuaternion, N::DualQuaternion)
+        return -N * complexconj(P) * N
+    end
+\end{minted}
+
+Также можно добавить 4 ползунка для самой плоскости, 3 из которых регулируют вектор нормали и один для расстояния от начала координат:
+
+\begin{minted}{julia}
+    @bind nx Slider(-1:0.01:1, default=0.0, show_value=true)
+    @bind ny Slider(-1:0.01:1, default=0.0, show_value=true)
+    @bind nz Slider(-1:0.01:1, default=1.0, show_value=true)
+    @bind d_plane Slider(-2:0.1:2, default=0.5, show_value=true)
+\end{minted}
+
+Результат программы представлен на графике 
+
+\begin{figure}
+    \center
+    \includegraphics[width=0.7\textwidth]{img/4.pdf}
+    \caption{Винтовое движение пирамиды с параметрами вращения $180^\circ$ и отражение ее относительно плоскости}
+    \label{fig:img003}
+\end{figure}
+
+
 
