@@ -1,0 +1,28 @@
+%% The font family Libertinus is derived from the Linux Libertine and enhanced with a math font by Khaled Hosny.
+%% url: ctan.org/fonts/libertinus
+
+% \newfontfamily\cyrillicfont[Script=Cyrillic,Ligatures={Common,TeX}]{Libertinus Serif}
+% \newfontfamily\cyrillicfontsf[Script=Cyrillic,Ligatures={Common,TeX},Scale=MatchLowercase]{Libertinus Sans}
+% \newfontfamily\cyrillicfonttt[Script=Cyrillic,Scale=MatchLowercase]{Libertinus Mono}
+
+% \usepackage{libertinus-otf}
+
+\setmainfont[Ligatures={Common,TeX}]{Libertinus Serif}
+\setromanfont[Ligatures={Common,TeX}]{Libertinus Serif}
+\setsansfont[Ligatures={Common,TeX},Scale=MatchLowercase]{Libertinus Sans}
+\setmonofont[Scale=MatchLowercase,Scale=0.9]{Libertinus Mono}
+
+\makeatletter
+\AtBeginDocument{%
+  \@ifpackageloaded{unicode-math}{%
+    \setmathfont{Libertinus Math}
+  }{%
+  }
+}
+\makeatother
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% coding: utf-8-unix
+%%% End:

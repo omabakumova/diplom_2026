@@ -1,0 +1,36 @@
+(TeX-add-style-hook
+ "title-student"
+ (lambda ()
+   (TeX-run-style-hooks
+    "mdwtab")
+   (TeX-add-symbols
+    "brsTable"
+    "approvedStamp"
+    "authorTable"
+    "brsTableProblemType"
+    "brsTableBalls"
+    "brsTableBallsSum"
+    "brsTableAttestInterim"
+    "brsTableAttestFinal"
+    "brsTableTotal"
+    "brsTableText"
+    "brsTablePresentation"
+    "brsTableProtection"
+    "PHDtitleDescr"
+    "PHDauthorName"
+    "PHDprogramDescr"
+    "brsTableCourse"
+    "PHDauthorDescr"
+    "PHDstudygroupDescr"
+    "PHDcountryDescr"
+    "PHDchiefDescr"
+    "PHDyearShort"
+    "PHDapprove"
+    "PHDstudentdegreeDescr"
+    "PHDstudentidDescr"
+    "PHDdegreeDescr"
+    "PHDfieldDescr")
+   (LaTeX-add-environments
+    '("collaboration" LaTeX-env-args ["argument"] 0)))
+ :latex)
+
